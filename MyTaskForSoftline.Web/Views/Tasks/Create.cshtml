@@ -1,0 +1,37 @@
+﻿@model MyTaskForSoftline.Services.Models.TaskStatusesModel
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/popup.css" />
+
+
+<div class="cont">
+    <div class="text">
+        Create
+    </div>
+    @using (Html.BeginForm("Create", "Tasks", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+    {
+        @Html.HiddenFor(model => model.TaskId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusesNames, new { @class = "control-label" })
+            @Html.DropDownList("StatusName", Model.StatusesNames as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.StatusesNames)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="reset" value="Reset" class="btn btn-primary" />
+        </div>
+    }
+
+</div>
